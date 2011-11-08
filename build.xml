@@ -14,15 +14,11 @@
 		<java jar="${FLEX_HOME}/lib/compc.jar" dir="." fork="true" failonerror="true">
 			<arg value="+flexlib=${FLEX_HOME}/frameworks" />
 			<arg value="-incremental=true" />
-				
 			<arg value="-source-path+=${src.dir}" />
-			
 			<!-- Include all classes in this path. -->
 			<arg value="-include-sources=${src.dir}/${package.dir}" />
-			
 			<!-- List of SWC files or directories to compile against but to omit from linking -->
 			<arg value="-external-library-path+=${libs.dir}" />
-			
 			<arg value="-output=${output.swc}" />
 		</java>
 			
@@ -40,13 +36,20 @@
 			<format property="docgen.time" pattern="MM/dd/yyyy hh:mm aa" unit="hour"/>
 		</tstamp>
 		
-		<exec executable="${ASDOC}">
-            <arg line="-source-path ${src.dir}
-                       -doc-sources ${src.dir}
-                       -output ${docs.dir}
-                       -window-title '${project.title} ${ver.num}'
-                       -main-title '${project.title} ${ver.num}'
-                       -footer '${project.title} - Documentation generated at: ${docgen.time}'"/>
+		<exec executable="${ASDOC}" failOnError="true">
+            <arg line="-doc-sources ${src.dir} "/>
+            <!-- <arg line="-source-path ${FLEX_HOME}/frameworks/projects/airframework/src "/>
+            <arg line="-source-path ${FLEX_HOME}/frameworks/projects/airspark/src "/>
+            <arg line="-source-path ${FLEX_HOME}/frameworks/projects/framework/src "/>
+            <arg line="-source-path ${FLEX_HOME}/frameworks/projects/sparkskins/src "/>
+            <arg line="-source-path ${FLEX_HOME}/frameworks/projects/osmf/src "/>
+            <arg line="-source-path ${FLEX_HOME}/frameworks/projects/rpc/src "/>
+            <arg line="-source-path ${FLEX_HOME}/frameworks/projects/textLayout/src "/> -->
+            <!--  <arg line="-external-library-path ${basedir}/source/libs" /> -->
+            <arg line="-window-title '${project.title} ${ver.num}' "/>
+            <arg line="-main-title '${project.title} ${ver.num}' "/>
+            <arg line="-footer '${project.title} - Documentation generated at: ${docgen.time}' "/>
+            <arg line="-output ${docs.dir}"/>
         </exec>
 		<echo>ASDOC documentation generated successfully</echo>
 	</target>
